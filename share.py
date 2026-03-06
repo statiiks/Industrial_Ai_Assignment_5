@@ -28,12 +28,35 @@ def show_scatter(x,y):
     plt.scatter(x, y)
     plt.show()
 
-def get_ground_level(pcd):
-    return 64
+def get_ground_level(pcd, bins=100, plot=True, save_path=None):
+    z_values = pcd[:,2]
+
+    counts, bin_edges = np.histogram(z_values, bins=bins)
+
+    max_bin_idx = np.argmax(counts)
+
+    ground_level = (bin_edges[max_bin_idx] + bin_edges[max_bin_idx + 1]) / 2
+
+    if plot:
+        plt.figure(figsize=(8, 5))
+        plt.hist(z_values, bins=bins, edgecolor="black")
+        plt.axvline(ground_level, linestyle="--", label=f"Estimated ground = {ground_level:.3f}")
+        plt.xlabel("z value")
+        plt.ylabel("Number of points")
+        plt.title("Histogram of z values")
+        plt.legend()
+
+        if save_path is not None:
+            plt.savefig(save_path, dpi=300, bbox_inches="tight")
+
+        plt.show()
+
+    return ground_level
 
 
 #%% read file containing point cloud data
-pcd = np.load("dataset1.npy")
+dataset_name = "dataset1.npy"
+pcd = np.load(dataset_name)
 
 pcd.shape
 
@@ -56,12 +79,14 @@ For both the datasets
 Report the ground level in the readme file in your github project
 Add the histogram plots to your project readme
 '''
-est_ground_level = get_ground_level(pcd)
-print(est_ground_level)
+est_ground_level = get_ground_level(pcd, bins=100, plot=True, save_path="hist_dataset1.png")
+print("Estimated ground level:", est_ground_level)
 
-pcd_above_ground = pcd[pcd[:,2] > est_ground_level] 
+ground_pad = 0.2 # ignore points realy close to the ground
+pcd_above_ground = pcd[pcd[:,2] > est_ground_level+ ground_pad] 
 #%%
-pcd_above_ground.shape
+print("Original shape:", pcd.shape)
+print("Above ground shape:", pcd_above_ground.shape)
 
 #%% side view
 show_cloud(pcd_above_ground)
