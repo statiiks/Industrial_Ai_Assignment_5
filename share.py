@@ -196,6 +196,7 @@ plt.title('DBSCAN: %d clusters' % clusters,fontsize=20)
 plt.xlabel('x axis',fontsize=14)
 plt.ylabel('y axis',fontsize=14)
 plt.show()
+plt.savefig(f"Clusterd_{dataset_name}.png", dpi=300, bbox_inches="tight")
 
 #%%
 '''
@@ -213,7 +214,7 @@ Add the plot of the catenary cluster to the readme
 '''
 
 # %%
-labels = clustering.labels_
+glabels = clustering.labels_
 unique_lables = [label for label in set(labels) if label != -1]
 
 cluster_info = []
