@@ -62,7 +62,7 @@
 
 # 
 
-# !\[Cluster plot dataset1](cluster\_dataset1.png)
+# !\[Cluster plot dataset1](Clusterd\_dataset1.png)
 
 # 
 
@@ -76,7 +76,7 @@
 
 # 
 
-# !\[Cluster plot dataset2](cluster\_dataset2.png)
+# !\[Cluster plot dataset2](Clusterd\_dataset2.png)
 
 # 
 
