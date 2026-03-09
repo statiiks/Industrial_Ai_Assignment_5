@@ -76,7 +76,7 @@ def find_optimal_eps(points, min_samples=5, plot=True, save_path=None):
     return k_distances
 
 #%% read file containing point cloud data
-dataset_name = "dataset1"
+dataset_name = "dataset2"
 pcd = np.load(f"{dataset_name}.npy")
 
 pcd.shape
@@ -214,7 +214,7 @@ Add the plot of the catenary cluster to the readme
 '''
 
 # %%
-glabels = clustering.labels_
+labels = clustering.labels_
 unique_lables = [label for label in set(labels) if label != -1]
 
 cluster_info = []
